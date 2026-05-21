@@ -39,10 +39,86 @@ jobs:
         comparison-method: contains
         timeout: 10
         max-score: 1
+    - name: t1-3
+      id: t1-3
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t1-3
+        setup-command: gcc ./code/1-3 -o a
+        command: "./a"
+        input: ''
+        expected-output: |-
+          .*
+          PATH.*
+        comparison-method: regex
+        timeout: 10
+        max-score: 1
+    - name: t1-4
+      id: t1-4
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t1-4
+        setup-command: gcc ./code/1-4.c -o a
+        command: "./a ./code/myfile.txt"
+        input: " "
+        expected-output: "The sun rose slowly over the distant mountains, \ncasting
+          a warm golden light across the vast open plains that stretched endlessly
+          toward the horizon. \nBirds began to sing their morning songs, \nfilling
+          the crisp air with melodies that seemed to echo through every valley and
+          hollow. \nA gentle breeze moved through the tall grass, making it sway back
+          and forth in a rhythmic, \nalmost hypnotic motion. In the distance, a river
+          wound its way through the landscape like a silver ribbon, \ncatching the
+          early light and scattering it in a thousand directions.\n\nA young traveler
+          stood at the edge of the road, \nadjusting the straps of his heavy backpack
+          and looking out at the world before him. \nHe had been walking for three
+          days now, ever since he left the small town where he had spent most of his
+          childhood. \nThe decision had not been easy, but he knew deep in his heart
+          that it was the right one. \nThere was something out there, beyond the familiar
+          streets and faces, beyond the comfortable routine of daily life, \nthat
+          called to him like a distant song he could never quite make out.\n\nHe had
+          brought with him only the essentials: a change of clothes, a worn leather
+          journal, a small compass, \na pocketknife, some dried food, and a water
+          bottle\n"
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: t2-1
+      id: t2-1
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t2-1
+        setup-command: gcc ./code/2-1.c -o a
+        command: "./a; cat ./student.txt"
+        input: "kim 20 \nlee 30\npark 40\nquit\n"
+        expected-output: |
+          kim 20
+          lee 30
+          park 40
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
+    - name: t2-2
+      id: t2-2
+      uses: classroom-resources/autograding-io-grader@v1
+      with:
+        test-name: t2-2
+        setup-command: gcc ./code/2-1.c -o 2-1; gcc ./code/2-2.c -o 2-2;
+        command: "./2-1; ./2-2;"
+        input: "kim 20 \nlee 30\npark 40\nquit\n"
+        expected-output: |
+          max: 40
+          avg: 30.00
+        comparison-method: contains
+        timeout: 10
+        max-score: 1
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
         T1-1_RESULTS: "${{steps.t1-1.outputs.result}}"
         T1-2_RESULTS: "${{steps.t1-2.outputs.result}}"
+        T1-3_RESULTS: "${{steps.t1-3.outputs.result}}"
+        T1-4_RESULTS: "${{steps.t1-4.outputs.result}}"
+        T2-1_RESULTS: "${{steps.t2-1.outputs.result}}"
+        T2-2_RESULTS: "${{steps.t2-2.outputs.result}}"
       with:
-        runners: t1-1,t1-2
+        runners: t1-1,t1-2,t1-3,t1-4,t2-1,t2-2
