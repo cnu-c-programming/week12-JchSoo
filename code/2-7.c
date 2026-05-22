@@ -9,8 +9,14 @@ typedef struct config {
     unsigned long long Address;
 } Config;
 
-void config_parser(Config* config_ptr) {
 
+void config_parser(Config* config_ptr) {
+    FILE* fp = fopen("config.txt", "r");
+    fscanf(fp, "InputFileName=%s\nOptions=%d\nSectionName=%s\nAddress=%x", 
+            config_ptr->InputFileName, config_ptr->Options, config_ptr->SectionName, config_ptr->Address
+    );
+    
+            
 }
 
 int main(int argc, const char* argv[]) {
