@@ -13,7 +13,7 @@ int main(int argc, const char* argv[]) {
     char buf_fp2[256] = {0};
 
     char* res_fp1 = fgets(buf_fp1, sizeof(buf_fp1), fp1);
-    char* res_fp2 = fgets(buf_fp2, sizeof(buf_fp1), fp2);
+    char* res_fp2 = fgets(buf_fp2, sizeof(buf_fp2), fp2);
 
 
     
