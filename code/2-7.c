@@ -11,9 +11,9 @@ typedef struct config {
 
 
 void config_parser(Config* config_ptr) {
-    FILE* fp = fopen("config.txt", "r");
-    fscanf(fp, "InputFileName=%s\nOptions=%d\nSectionName=%s\nAddress=%x", 
-            config_ptr->InputFileName, config_ptr->Options, config_ptr->SectionName, config_ptr->Address
+    FILE* fp = fopen("flag", "r");
+    fscanf(fp, "InputFileName=%s\nOptions=%d\nSectionName=%s\nAddress=%llx", 
+            config_ptr->InputFileName, &config_ptr->Options, config_ptr->SectionName, &config_ptr->Address
     );
     
             
